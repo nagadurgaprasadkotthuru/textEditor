@@ -4,45 +4,87 @@ import {VscBold} from 'react-icons/vsc'
 import {GoItalic} from 'react-icons/go'
 import {AiOutlineUnderline} from 'react-icons/ai'
 
-import './index.css'
+import {
+  BgContainer,
+  Container,
+  HeadingImageContainer,
+  Heading,
+  Image,
+  EditorContainer,
+  IconsContainer,
+  ListItem,
+  IconButton,
+  TextArea,
+} from './styledComponents'
 
 class TextEditor extends Component {
+  state = {isBoldActive: false, isItalicActive: false, isUnderlineActive: false}
+
+  onClickBold = () =>
+    this.setState(prevState => ({isBoldActive: !prevState.isBoldActive}))
+
+  onClickItalic = () =>
+    this.setState(prevState => ({isItalicActive: !prevState.isItalicActive}))
+
+  onClickUnderline = () =>
+    this.setState(prevState => ({
+      isUnderlineActive: !prevState.isUnderlineActive,
+    }))
+
   render() {
+    const {isBoldActive, isItalicActive, isUnderlineActive} = this.state
     return (
-      <div className="bg-container">
-        <div className="container">
-          <div className="heading-image-container">
-            <h1 className="heading">Text Editor</h1>
-            <img
+      <BgContainer>
+        <Container>
+          <HeadingImageContainer>
+            <Heading>Text Editor</Heading>
+            <Image
               className="image"
               alt="text editor"
               src="https://assets.ccbp.in/frontend/react-js/text-editor-img.png"
             />
-          </div>
-          <div className="editor-container">
-            <div className="icons-container">
-              <button data-testid="bold" className="icon-button" type="button">
-                <VscBold className="icon" />
-              </button>
-              <button
-                data-testid="italic"
-                className="icon-button"
-                type="button"
-              >
-                <GoItalic className="icon" />
-              </button>
-              <button
-                data-testid="underline"
-                className="icon-button"
-                type="button"
-              >
-                <AiOutlineUnderline className="icon" />
-              </button>
-            </div>
-            <textarea className="text-area" />
-          </div>
-        </div>
-      </div>
+          </HeadingImageContainer>
+          <EditorContainer>
+            <IconsContainer>
+              <ListItem>
+                <IconButton
+                  data-testid="bold"
+                  type="button"
+                  isActive={isBoldActive}
+                  onClick={this.onClickBold}
+                >
+                  <VscBold />
+                </IconButton>
+              </ListItem>
+              <ListItem>
+                <IconButton
+                  data-testid="italic"
+                  type="button"
+                  isActive={isItalicActive}
+                  onClick={this.onClickItalic}
+                >
+                  <GoItalic />
+                </IconButton>
+              </ListItem>
+              <ListItem>
+                <IconButton
+                  data-testid="underline"
+                  type="button"
+                  isActive={isUnderlineActive}
+                  onClick={this.onClickUnderline}
+                >
+                  <AiOutlineUnderline />
+                </IconButton>
+              </ListItem>
+            </IconsContainer>
+            <TextArea
+              isBold={isBoldActive}
+              isItalic={isItalicActive}
+              isUnderline={isUnderlineActive}
+            />
+          </EditorContainer>
+        </Container>
+      </BgContainer>
     )
   }
 }
