@@ -39,7 +39,6 @@ class TextEditor extends Component {
           <HeadingImageContainer>
             <Heading>Text Editor</Heading>
             <Image
-              className="image"
               alt="text editor"
               src="https://assets.ccbp.in/frontend/react-js/text-editor-img.png"
             />
